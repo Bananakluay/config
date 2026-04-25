@@ -1,0 +1,71 @@
+/* ================================
+   Color System
+   ================================ */
+
+* {
+    primary-text: rgba(255, 255, 255, 0.90);
+    active-text: rgba(255, 255, 255, 1.00);
+
+    overlay-bg: rgba(0, 0, 0, 0.80);
+    selected-bg: rgba(255, 255, 255, 0.18);
+
+    background-color: transparent;
+    text-color: @primary-text;
+
+    font: "JetBrainsMono Nerd Font 48";
+}
+
+
+/* ================================
+   Window
+   ================================ */
+
+window {
+    fullscreen: true;
+    background-color: @overlay-bg;
+}
+
+
+/* ================================
+   Layout
+   ================================ */
+
+mainbox {
+    children: [ listview ];
+    padding: 0;
+}
+
+listview {
+    columns: 4;
+    lines: 1;
+    flow: horizontal;
+
+    fixed-columns: true;
+    fixed-height: true;
+
+    spacing: 2em;
+    margin: 42% 13% 0% 13%;
+}
+
+
+/* ================================
+   Elements
+   ================================ */
+
+element {
+    padding: 0.9em;
+    border-radius: 9px;
+    background-color: transparent;
+    text-color: @primary-text;
+}
+
+element selected {
+    background-color: @selected-bg;
+    text-color: @active-text;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+

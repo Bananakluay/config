@@ -1,0 +1,119 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 42,
+
+  "exclusive": true,
+  "passthrough": false,
+  "fixed-center": true,
+  "ipc": true,
+
+  "spacing": 8,
+
+  "margin-top": 8,
+  "margin-left": 12,
+  "margin-right": 12,
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "group/system"
+  ],
+
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": [
+      "pulseaudio",
+      "bluetooth",
+      "network",
+      "hyprland/language",
+      "custom/power"
+    ]
+  },
+
+  "hyprland/workspaces": {
+    "active-only": false,
+    "format": "{name}",
+    "show-special": false,
+    "disable-scroll": false,
+
+    "on-click": "activate",
+
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+
+  "clock": {
+    "format": " {:%H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}"
+  },
+
+  "pulseaudio": {
+    "format": " {volume}%",
+    "format-muted": " muted",
+    "scroll-step": 5,
+
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+
+    "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-disabled": "Bluetooth disabled",
+    "tooltip-format-off": "Bluetooth off",
+    "tooltip-format-connected": "{device_alias}\n{num_connections} connected",
+
+    "on-click": "kitty --class popup-term -e bluetoothctl",
+    "on-click-right": "bluetoothctl power toggle"
+  },
+
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 wired",
+    "format-disconnected": "󰤭 offline",
+
+    "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname}",
+    "tooltip-format-disconnected": "Disconnected",
+
+    "on-click": "kitty --class popup-term -e iwctl"
+  },
+
+  "hyprland/language": {
+    "format": "󰌌 {short}",
+    "keyboard-name": "shenzhen-yizhita-technology-co.--ltd-mad60-keyboard",
+
+    "tooltip": true,
+    "tooltip-format": "Keyboard: {long}",
+
+    "on-click": "hyprctl switchxkblayout all next"
+  },
+
+  "custom/power": {
+    "format": "⏻",
+
+    "tooltip": true,
+    "tooltip-format": "Power menu",
+
+    "on-click": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+  }
+}

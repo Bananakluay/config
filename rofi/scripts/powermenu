@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+shutdown="󰐥"   # power
+reboot="󰜉"     # restart
+suspend="󰒲"    # sleep
+logout="󰗽"     # logout
+
+chosen="$(printf "%s\n%s\n%s\n%s\n" "$shutdown" "$reboot" "$suspend" "$logout" \
+    | rofi -dmenu -theme "$HOME/.config/rofi/themes/powermenu.rasi")"
+
+case "$chosen" in
+  "$shutdown")
+    poweroff
+    ;;
+  "$reboot")
+    reboot
+    ;;
+  "$suspend")
+    systemctl suspend
+    ;;
+  "$logout")
+    hyprctl dispatch exit
+    ;;
+  *)
+    exit 0
+    ;;
+esac

@@ -1,0 +1,84 @@
+configuration {
+    modes: [drun];
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
+    icon-theme: "Papirus";
+    display-drun: "";
+
+    kb-row-up: "k";
+    kb-row-down: "j";
+    kb-row-left: "h";
+    kb-row-right: "l";
+}
+
+// Global
+* {
+    background-color: transparent;
+    text-color: rgba(255, 255, 255, 0.92);
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+// Window 
+window {
+    fullscreen: true;
+    background-color: rgba(0, 0, 0, 0.72);
+}
+
+// Main Box
+mainbox {
+    padding: 10%;
+    spacing: 4em;
+}
+
+// Input Bar
+inputbar {
+    background-color: rgba(255, 255, 255, 0.08);
+    children: ["prompt", "entry"];
+    border-radius: 10px;
+    margin: 0 30%;
+    padding: 0.9em;
+    spacing: 0.5em;
+}
+
+entry {
+    placeholder: "Search:";
+    placeholder-color: rgba(255, 255, 255, 0.45);
+}
+
+// List View
+listview {
+    columns: 8;
+    fixed-columns: true;
+    flow: horizontal;
+}
+
+element {
+    border-radius: 10px;
+    orientation: vertical;
+    padding: 2em;
+    children: [element-icon, element-text];
+    spacing: 0.5em;
+    background-color: transparent;
+    text-color: rgba(255, 255, 255, 0.55);
+}
+
+element-icon {
+    size: 2em;
+}
+
+element-text {
+    highlight: none;
+    horizontal-align: 0.5;
+    text-color: rgba(255, 255, 255, 0.55);
+}
+
+element selected {
+    background-color: rgba(255, 255, 255, 0.12);
+    text-color: rgba(255, 255, 255, 0.95);
+}
+
+element selected element-text {
+    text-color: rgba(255, 255, 255, 0.95);
+}

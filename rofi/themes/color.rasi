@@ -1,0 +1,12 @@
+* {
+    font: "JetBrainsMono Nerd Font 10";
+
+    background:      rgba(0, 0, 0, 0.25);
+    background-alt:  red;
+
+    foreground:      rgba(255, 255, 255, 0.92);
+
+    selected:        rgba(255, 255, 255, 0.16);
+    active:          rgba(116, 186, 168, 0.95);
+    urgent:          rgba(247, 113, 136, 0.95);
+}
