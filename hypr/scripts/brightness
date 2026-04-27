@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+BUS="4"
+STEP="2"
+APP_NAME="brightness"
+CACHE="$HOME/.cache/brightness_value"
+LOCK="/tmp/brightness-ddc.lock"
+
+mkdir -p "$HOME/.cache"
+
+clamp() {
+  if [ "$1" -lt 0 ]; then
+    echo 0
+  elif [ "$1" -gt 100 ]; then
+    echo 100
+  else
+    echo "$1"
+  fi
+}
+
+if [ -f "$CACHE" ]; then
+  CURRENT=$(cat "$CACHE")
+else
+  CURRENT=$(ddcutil --bus "$BUS" getvcp 10 | grep -oP 'current value =\s*\K[0-9]+')
+  CURRENT="${CURRENT:-50}"
+fi
+
+case "$1" in
+  up)
+    BRIGHTNESS=$(clamp $((CURRENT + STEP)))
+    ;;
+  down)
+    BRIGHTNESS=$(clamp $((CURRENT - STEP)))
+    ;;
+  set)
+    BRIGHTNESS=$(clamp "$2")
+    ;;
+  *)
+    echo "Usage: brightness.sh up|down|set <value>"
+    exit 1
+    ;;
+esac
+
+echo "$BRIGHTNESS" > "$CACHE"
+
+notify-send \
+  -a "$APP_NAME" \
+  -h int:value:"$BRIGHTNESS" \
+  "Brightness" \
+  "${BRIGHTNESS}%"
+
+(
+  flock -n 9 || exit 0
+  ddcutil --bus "$BUS" --sleep-multiplier 0.3 setvcp 10 "$BRIGHTNESS" >/dev/null 2>&1
+) 9>"$LOCK" &

@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+wall_dir="$HOME/Pictures/wallpapers"
+cache_dir="$HOME/.cache/thumbnails/bgselector"
+theme="$HOME/.config/rofi/themes/bgselector.rasi"
+
+thumb_w=262
+thumb_h=540
+
+mkdir -p "$wall_dir" "$cache_dir"
+
+# Clean thumbnails when wallpaper was deleted
+for thumb in "$cache_dir"/*; do
+	[ -e "$thumb" ] || continue
+
+	file="$(basename "$thumb")"
+	name="${file%.*}"
+
+	find "$wall_dir" -maxdepth 1 -type f \
+		\( -iname "$name.jpg" -o -iname "$name.jpeg" -o -iname "$name.png" -o -iname "$name.webp" \) |
+	grep -q . || rm -f "$thumb"
+done
+
+# Generate/update thumbnails
+find "$wall_dir" -maxdepth 1 -type f \
+	\( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) |
+sort |
+while IFS= read -r image; do
+	file="$(basename "$image")"
+	name="${file%.*}"
+	thumb="$cache_dir/$name.png"
+
+	[ -s "$thumb" ] && [ "$thumb" -nt "$image" ] && continue
+
+	magick "$image" \
+		-strip \
+		-thumbnail "${thumb_w}x${thumb_h}^" \
+		-gravity center \
+		-extent "${thumb_w}x${thumb_h}" \
+		"$thumb"
+done
+
+# Select wallpaper
+selection=$(
+	find "$wall_dir" -maxdepth 1 -type f \
+		\( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) |
+	sort |
+	while IFS= read -r image; do
+		file="$(basename "$image")"
+		name="${file%.*}"
+		thumb="$cache_dir/$name.png"
+
+		printf '%s\0icon\x1f%s\n' "$file" "$thumb"
+	done |
+	rofi -dmenu -theme "$theme" -selected-row 3
+)
+
+[ -z "$selection" ] && exit 0
+
+wallpaper="$wall_dir/$selection"
+
+awww img "$wallpaper" \
+	-t grow \
+	--transition-duration 1 \
+	--transition-fps 75
+
+sleep 0.2
+colorwaybar "$wallpaper"

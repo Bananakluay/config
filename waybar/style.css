@@ -1,139 +1,101 @@
-/* ================================
-   Global
-   ================================ */
+@define-color bg        rgba(20, 20, 20, 0.80);
+@define-color fg        rgba(255, 255, 255, 0.95);
+
+@define-color hover     rgba(255, 255, 255, 0.10);
+@define-color active    rgba(255, 255, 255, 0.18);
+
+@define-color danger    rgba(255, 120, 120, 0.95);
+@define-color danger-bg rgba(255, 80, 80, 0.18);
 
 * {
+  all: unset;
+
   font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans", sans-serif;
   font-size: 13px;
   font-weight: bold;
 
   min-height: 0;
+
+  color: @fg;
   border: none;
   box-shadow: none;
   text-shadow: none;
-
-  color: rgba(255, 255, 255, 0.92);
 }
 
+/* Main bar */
+window#waybar {
+  background: @bg;
+  border-radius: 12px;
+  padding: 0;
+}
 
-/* ================================
-   Main Window
-   ================================ */
-
-window#waybar,
 window#waybar.empty,
 window#waybar.empty #window {
-  background: transparent;
-  padding: 0;
-  border: 0;
-}
-
-
-/* ================================
-   Main Islands
-
-   outer radius = 14px
-   island padding = 5px
-   inner radius = 14px - 5px = 9px
-   ================================ */
-
-#workspaces,
-#clock,
-#system {
-  background: rgba(20, 20, 20, 0.42);
-  /* border: 1px solid rgba(255, 255, 255, 0.10); */
-  border-radius: 14px;
-
-  margin: 0 3px;
-
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-
-/* ================================
-   Module Groups
-   ================================ */
-
-.modules-left,
-.modules-center,
-.modules-right {
-  padding: 2px 4px;
-}
-
-
-/* ================================
-   Tooltip
-   ================================ */
-
-tooltip {
-  background: rgba(20, 20, 20, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: @bg;
   border-radius: 12px;
 }
 
-tooltip label {
-  color: rgba(255, 255, 255, 0.95);
+/* Bar sections */
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 4px;
 }
 
+/* Groups */
+#workspaces,
+#clock,
+#system {
+  border-radius: 8px;
+}
 
-/* ================================
-   Workspaces
-   ================================ */
-
+/* Workspaces */
 #workspaces {
-  padding: 5px;
+  padding: 3px;
 }
 
 #workspaces button {
+  color: alpha(@fg, 0.45);
   background: transparent;
-  color: rgba(255, 255, 255, 0.42);
 
-  margin: 0 2px;
+  margin: 1px;
   padding: 3px 10px;
 
-  border-radius: 9px;
+  border-radius: 6px;
 
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 #workspaces button:hover {
-  background: rgba(255, 255, 255, 0.10);
-  color: rgba(255, 255, 255, 0.95);
+  background: @hover;
+  color: @fg;
 }
 
 #workspaces button.active {
-  background: rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 1);
+  background: @active;
+  color: @fg;
 }
 
 #workspaces button.persistent {
-  color: rgba(255, 255, 255, 0.32);
+  color: alpha(@fg, 0.30);
 }
 
 #workspaces button.urgent {
-  background: rgba(255, 80, 80, 0.25);
-  color: rgba(255, 255, 255, 1);
+  background: @danger-bg;
+  color: @fg;
 }
 
-
-/* ================================
-   Clock
-   ================================ */
-
+/* Clock */
 #clock {
-  padding: 8px 18px;
+  padding: 6px 18px;
   font-weight: 800;
 }
 
-
-/* ================================
-   System Island
-   ================================ */
-
+/* System group */
 #system {
-  padding: 5px;
+  padding: 3px;
 }
 
 #pulseaudio,
@@ -146,9 +108,11 @@ tooltip label {
   margin: 0;
   padding: 3px 10px;
 
-  border-radius: 9px;
+  border-radius: 6px;
 
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 #pulseaudio:hover,
@@ -156,39 +120,42 @@ tooltip label {
 #network:hover,
 #language:hover,
 #custom-power:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: @hover;
 }
 
-
-/* ================================
-   Module States
-   ================================ */
-
+/* States */
 #language {
   min-width: 36px;
 }
 
 #pulseaudio.muted {
-  color: rgba(255, 120, 120, 0.95);
+  color: @danger;
 }
 
 #bluetooth.disabled,
 #bluetooth.off,
 #network.disconnected {
-  color: rgba(255, 255, 255, 0.45);
+  color: alpha(@fg, 0.45);
 }
 
-
-/* ================================
-   Power Button
-   ================================ */
-
+/* Power */
 #custom-power {
   min-width: 22px;
-  padding: 3px 6px;
+  padding: 3px 8px;
 }
 
 #custom-power:hover {
-  background: rgba(255, 80, 80, 0.18);
-  color: rgba(255, 150, 150, 1);
+  background: @danger-bg;
+  color: @danger;
+}
+
+/* Tooltip */
+tooltip {
+  background: @bg;
+  border-radius: 8px;
+}
+
+tooltip label {
+  padding: 6px 10px;
+  font-size: 12px;
 }

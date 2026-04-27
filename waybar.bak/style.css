@@ -1,0 +1,137 @@
+* {
+  font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans", sans-serif;
+  font-size: 13px;
+
+  font-weight: bold;
+  min-height: 0;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+window#waybar,
+window#waybar.empty,
+window#waybar.empty #window {
+  background: transparent;
+  padding: 0;
+  border: 0;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 2px 4px;
+}
+
+/* Islands */
+#workspaces,
+#clock,
+#system {
+  background: rgba(20, 20, 20, 0.42);
+  border-radius: 14px;
+  margin: 0 3px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Tooltip */
+tooltip {
+  background: rgba(20, 20, 20, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+}
+
+tooltip label {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Workspaces */
+#workspaces {
+  padding: 5px;
+}
+
+#workspaces button {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0 2px;
+  padding: 3px 10px;
+  border-radius: 9px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+#workspaces button.active {
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 1);
+}
+
+#workspaces button.persistent {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+#workspaces button.urgent {
+  background: rgba(255, 80, 80, 0.25);
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Clock */
+#clock {
+  padding: 8px 18px;
+  font-weight: 800;
+}
+
+/* System */
+#system {
+  padding: 5px;
+}
+
+#pulseaudio,
+#bluetooth,
+#network,
+#language,
+#custom-power {
+  background: transparent;
+  margin: 0;
+  padding: 3px 10px;
+  border-radius: 9px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#pulseaudio:hover,
+#bluetooth:hover,
+#network:hover,
+#language:hover,
+#custom-power:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* States */
+#language {
+  min-width: 36px;
+}
+
+#pulseaudio.muted {
+  color: rgba(255, 120, 120, 0.95);
+}
+
+#bluetooth.disabled,
+#bluetooth.off,
+#network.disconnected {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Power */
+#custom-power {
+  min-width: 22px;
+  padding: 3px 6px;
+}
+
+#custom-power:hover {
+  background: rgba(255, 80, 80, 0.18);
+  color: rgba(255, 150, 150, 1);
+}

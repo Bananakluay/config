@@ -1,35 +1,22 @@
-/* ================================
-   Color System
-   ================================ */
-
+// Global
 * {
-    primary-text: rgba(255, 255, 255, 0.90);
-    active-text: rgba(255, 255, 255, 1.00);
+    bg: rgba(20, 20, 20, 0.80);
+    fg: rgba(255, 255, 255, 0.95);
+    active: rgba(255, 255, 255, 0.18);
 
-    overlay-bg: rgba(0, 0, 0, 0.80);
-    selected-bg: rgba(255, 255, 255, 0.18);
-
-    background-color: transparent;
-    text-color: @primary-text;
 
     font: "JetBrainsMono Nerd Font 48";
+    background-color: transparent;
+    text-color: @fg;
 }
 
-
-/* ================================
-   Window
-   ================================ */
-
+// Window
 window {
     fullscreen: true;
-    background-color: @overlay-bg;
+    background-color: @bg;
 }
 
-
-/* ================================
-   Layout
-   ================================ */
-
+// Layout
 mainbox {
     children: [ listview ];
     padding: 0;
@@ -38,8 +25,7 @@ mainbox {
 listview {
     columns: 4;
     lines: 1;
-    flow: horizontal;
-
+    cycle: false;
     fixed-columns: true;
     fixed-height: true;
 
@@ -47,21 +33,15 @@ listview {
     margin: 42% 13% 0% 13%;
 }
 
-
-/* ================================
-   Elements
-   ================================ */
-
+// Elements
 element {
     padding: 0.9em;
     border-radius: 9px;
-    background-color: transparent;
-    text-color: @primary-text;
 }
 
-element selected {
-    background-color: @selected-bg;
-    text-color: @active-text;
+element.selected {
+    background-color: @active;
+    text-color: @fg-active;
 }
 
 element-text {
@@ -69,3 +49,6 @@ element-text {
     vertical-align: 0.5;
 }
 
+element-text selected {
+    text-color: @fg-active;
+}

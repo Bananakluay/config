@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+SINK="@DEFAULT_AUDIO_SINK@"
+step="${2:-0.05}"
+
+case "$1" in
+    up)
+        wpctl set-mute "$SINK" 0
+        wpctl set-volume -l 1.0 "$SINK" "${step}+"
+        ;;
+    down)
+        wpctl set-mute "$SINK" 0
+        wpctl set-volume "$SINK" "${step}-"
+        ;;
+    mute)
+        wpctl set-mute "$SINK" toggle
+        ;;
+    *)
+        echo "Usage: $0 {up|down|mute} [step]"
+        exit 1
+        ;;
+esac
+
+volume=$(wpctl get-volume "$SINK")
+
+vol_float=$(echo "$volume" | awk '{print $2}')
+vol_status=$(echo "$volume" | grep -o "\[MUTED\]")
+
+vol_value=$(awk -v v="$vol_float" 'BEGIN {
+    p = int(v * 100 + 0.5)
+    if (p < 0) p = 0
+    if (p > 100) p = 100
+    print p
+}')
+
+if [ "$vol_status" = "[MUTED]" ]; then
+    notify-send -a "muted" -h int:value:"$vol_value" "Muted" "${vol_value}%"
+    exit 0
+fi
+
+notify-send -a "volume" -h int:value:"$vol_value" "Volume" "${vol_value}%"
