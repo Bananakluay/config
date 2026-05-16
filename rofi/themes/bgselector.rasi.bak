@@ -1,3 +1,5 @@
+@import "colors.rasi"
+
 * {
     background-color:            transparent;
     text-color:                  white;
@@ -8,25 +10,29 @@ configuration {
     show-icons:                  true;
     drun-display-format:         "{name}";
     font:                        "JetBrains Mono Nerd Font 12";
-
-    kb-accept-entry:             "Return,space";
 }
 
 window {
     enabled:                     true;
-    fullscreen:                  true;
+    fullscreen:                  false;
+
     location:                    center;
     anchor:                      center;
+    width:                       90%;
+
     spacing:                     0px;
+    border-radius:               10px;
+
+    background-color:            transparent;
     transparency:                "real";
+
     cursor:                      "default";
-    background-color:            #141414CC;
 }
 
 mainbox {
     enabled:                     true;
     children:                    [ "listview" ];
-    padding:                     20% 0px;
+
     background-color:            transparent;
 }
 
@@ -35,13 +41,13 @@ listview {
     layout:                      vertical;
     reverse:                     false;
 
-    columns:                     5;
-    lines:                       1;
+    columns:                     5; /* Number of elements in a row */
+    lines:                       1; /* One row */
     fixed-height:                true;
     fixed-columns:               true;
 
     padding:                     26px 36px;
-    spacing:                     125px;
+    spacing:                     100px;
     border:                      0px;
 
     cycle:                       false;
@@ -55,14 +61,14 @@ element {
     enabled:                     true;
     orientation:                 vertical;
     children:                    [ "element-icon" ];
+
     expand:                      false;
 
     padding:                     0px;
     spacing:                     0px;
-    border:                      3px;
+    border:                      5px;
 
-    background-color:            #9a9a9a;
-    border-color:                #9a9a9a;
+    background-color:            transparent;
 
     cursor:                      pointer;
 }
@@ -70,11 +76,12 @@ element {
 element-icon {
     size:                        50%;
     expand:                      false;
+
     padding:                     0px;
+
     cursor:                      inherit;
 }
 
 element selected.normal {
-    border-color:                #FFFFFF;
-    border:                      4px;
+    background-color:            white;
 }

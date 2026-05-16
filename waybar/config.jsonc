@@ -32,20 +32,8 @@
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
     "persistent-workspaces": {
-      "*": 5
-    },
-    "format-icons": {
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "10"
-    }
+      "*": 10
+    }  
   },
 
   "clock": {
@@ -81,7 +69,7 @@
     "tooltip-format-connected": "{device_alias}\n{num_connections} connected",
     "tooltip-format-connected-battery": "{device_alias}\nBattery: {device_battery_percentage}%\n{num_connections} connected",
 
-    "on-click": "kitty --class popup-term -e bluetuith"
+    "on-click": "kitty --class popup-term -e bluetoothctl"
 
   },
 

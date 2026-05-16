@@ -52,7 +52,7 @@ selection=$(
 
 		printf '%s\0icon\x1f%s\n' "$file" "$thumb"
 	done |
-	rofi -dmenu -theme "$theme" -selected-row 3
+	rofi -dmenu -theme "$theme"
 )
 
 [ -z "$selection" ] && exit 0

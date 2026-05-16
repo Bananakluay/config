@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 BUS="4"
-STEP="2"
+STEP="${2:-2}"
 APP_NAME="brightness"
 CACHE="$HOME/.cache/brightness_value"
 LOCK="/tmp/brightness-ddc.lock"
@@ -43,11 +43,8 @@ esac
 
 echo "$BRIGHTNESS" > "$CACHE"
 
-notify-send \
-  -a "$APP_NAME" \
-  -h int:value:"$BRIGHTNESS" \
-  "Brightness" \
-  "${BRIGHTNESS}%"
+notify-send -a brightness -h int:value:"$BRIGHTNESS"  " " 
+
 
 (
   flock -n 9 || exit 0
