@@ -1,0 +1,132 @@
+@define-color bg        rgba(25, 29, 35, 0.90); /* #191D23 */
+@define-color fg        rgba(204, 213, 229, 1); /* #CCD5E5 */
+
+@define-color hover     rgba(169, 185, 239, 0.10); /* #A9B9EF*/
+@define-color active    rgba(169, 185, 239, 0.22); /* #A9B9EF*/
+
+@define-color danger-fg rgba(255, 192, 197, 0.95); /* #FFC0C5*/
+@define-color danger-bg rgba(247, 23, 53, 0.18);   /* #F71735*/
+
+/* Reset */
+* {
+  all: unset;
+
+  font-family: "JetBrainsMono Nerd Font Propo", "Noto Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  min-height: 0;
+
+  color: @fg;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* Outer containers – equal breathing on all sides */
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 6px 3px;
+}
+
+/* Main bar */
+window#waybar {
+  background: @bg;
+  border-radius: 10px;          /* outer radius */
+  /* opacity:0.95; */
+
+}
+
+window#waybar.empty,
+window#waybar.empty #window {
+  background: @bg;
+  border-radius: 10px;
+}
+
+/* ----- Pill base (all interactive modules) ----- */
+#workspaces button,
+#clock,
+#pulseaudio,
+#bluetooth,
+#network,
+#language,
+#custom-power {
+  background: transparent;
+  margin: 0 3px;
+  padding: 4px 10px;
+  border-radius: 7px;           /* inner radius – softer, floating nest */
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Unified hover for every module */
+#workspaces button:hover,
+#clock:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#network:hover,
+#language:hover,
+#custom-power:hover {
+  background: @hover;
+  color: @fg;
+}
+
+/* Workspace states */
+#workspaces button {
+  color: alpha(@fg, 0.50);
+}
+
+#workspaces button.active {
+  background: @active;
+  color: @fg;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+#workspaces button.persistent {
+  color: alpha(@fg, 0.35);
+}
+
+#workspaces button.urgent {
+  background: @danger-bg;
+  color: @danger-fg;
+}
+
+/* Clock */
+#clock {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Danger / warning states – consistent pattern */
+#pulseaudio.muted {
+  background: @danger-bg;
+  color: @danger-fg;
+}
+
+#network.disconnected {
+  color: alpha(@fg, 0.40);
+  background: @danger-bg;        /* makes danger pattern uniform */
+}
+
+/* Bluetooth off/disabled */
+#bluetooth.disabled,
+#bluetooth.off {
+  color: alpha(@fg, 0.40);
+}
+
+#custom-power:hover {
+  background: @danger-bg;
+  color: @danger-fg;
+}
+
+/* Tooltip – matches inner pill radius for a cohesive look */
+tooltip {
+  background: @bg;
+  border-radius: 7px;
+}
+
+tooltip label {
+  padding: 8px 12px;
+  font-size: 12px;
+}

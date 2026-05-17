@@ -1,0 +1,107 @@
+/**
+ * Mac-style minimal Rofi config 
+ * Matched to your Waybar theme
+ */
+
+configuration {
+    modi: "drun";
+    show-icons: true;
+    display-drun: ""; /* Nerd Font magnifying glass */
+    drun-display-format: "{name}";
+    font: "JetBrainsMono Nerd Font Propo 13";
+}
+
+* {
+
+    bg: rgba(25, 29, 35, 0.80); /* #191D23 */
+    fg: rgba(204, 213, 229, 1); /* #CCD5E5 */
+    active: rgba(169, 185, 239, 0.22); /* #A9B9EF*/
+
+    
+    /* Base resets */
+    background-color: transparent;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+/* The Main Window - matches your outer waybar container */
+window {
+    background-color: @bg;
+    border-radius: 10px; /* Outer radius from Waybar */
+    width: 600px;
+    padding: 15px;
+    
+    /* Center it like Spotlight */
+    location: center;
+    anchor: center;
+    
+    border: 0px;
+}
+
+/* Container for input and list */
+mainbox {
+    spacing: 15px;
+    children: [ inputbar, listview ];
+}
+
+/* The Search Bar */
+inputbar {
+    border-radius: 7px;       /* Inner pill radius from Waybar */
+    padding: 12px 15px;
+    spacing: 12px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @fg;
+    font: "JetBrainsMono Nerd Font Propo 14";
+    vertical-align: 0.5;
+}
+
+entry {
+    placeholder: "Search Apps...";
+    placeholder-color: #CCD5E580; /* alpha(@fg, 0.50) */
+    text-color: @fg;
+    vertical-align: 0.5;
+}
+
+/* The App List */
+listview {
+    lines: 6; /* Number of apps to show at once */
+    columns: 1;
+    scrollbar: false;
+    spacing: 4px;
+    fixed-height: true;
+    fixed-columns: true;
+    border: 0px;
+}
+
+/* Individual App Items - matches your Waybar pills */
+element {
+    padding: 8px 15px;
+    border-radius: 7px; /* Inner pill radius */
+    spacing: 12px;
+    background-color: transparent;
+}
+
+element normal.normal, element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+/* The Selected App - matches your Waybar active workspace/hover */
+element selected.normal {
+    background-color: @active; 
+    text-color: @fg;
+}
+
+element-icon {
+    size: 1.5em;
+}
+
+element-text {
+    text-color: inherit;
+    vertical-align: 0.5;
+}

@@ -1,0 +1,69 @@
+/* Modern Minimal Rofi Powermenu */
+
+configuration {
+    show-icons: false;
+}
+
+* {
+    font: "JetBrainsMono Nerd Font 48";
+
+    background-color: transparent;
+
+    bg: rgba(0, 0, 0, 0.8);
+    fg: rgba(204, 213, 229, 1); 
+    active: rgba(169, 185, 239, 0.22);
+}
+
+// Window
+window {
+    fullscreen: true;
+    background-color: @bg;
+    border: 0px;
+
+    children: ["listview"];
+}
+
+listview {
+    padding: 40% 13%;
+    columns: 4;
+    spacing: 200px;
+    cycle: false;
+    scrollbar: false;
+
+    border: 0px;
+
+    background-color: transparent;
+
+}
+element {
+    margin: 25px;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: transparent;
+
+    children: ["element-text"];
+}
+
+element normal.normal,
+element alternate.normal,
+{
+    background-color: transparent;
+}
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+
+    background-color: transparent;
+
+    text-color: white;
+
+}
+
+element-text {
+    background-color: transparent;
+
+}
+element selected.normal {
+    background-color: @active;
+}
+
